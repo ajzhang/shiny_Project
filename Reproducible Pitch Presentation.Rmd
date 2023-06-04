@@ -1,0 +1,86 @@
+---
+title: "Shiny project for Motor Trend Car Road Tests"
+author: "Aijun Zhang"
+date: "2023-06-01"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+
+- Problem: Exploring the relationship between variables in the mtcars data set.
+
+  Please see the variables: <br>
+  mpg	  Miles/(US) gallon &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  cyl  Number of cylinders <br>
+  disp	Displacement (cu.in.) &nbsp;&nbsp;|  hp  	Gross horsepower <br>
+  drat	Rear axle ratio &nbsp;&nbsp;&nbsp;&nbsp;|  wt	  Weight (1000 lbs) <br>
+  qsec	1/4 mile time &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  carb	Number of carburetors <br>
+  vs	  Engine (0 = V-shaped, 1 = straight) <br>
+  am	  Transmission (0 = automatic, 1 = manual) <br>
+  gear	Number of forward gears
+  
+- Solution: Interactive scatter plot using Shiny .
+- Benefits: Easy data visualization and analysis.
+
+## How It Works
+
+- Select the variable for the X-axis.
+- Adjust the range of the X-axis using the slider.
+- The scatter plot updates automatically.
+- Dots are color-coded based on "am" values (<span style="color: red;">red</span> dots are automatic; <span style="color: blue;">blue</span> manual).
+
+## Demo of the Shiny website
+
+```{r, echo=FALSE}
+library(shiny)
+library(ggplot2)
+
+# Shiny app code
+ui <- fluidPage(
+  titlePanel("mtcars Scatter Plot"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        inputId = "x_var",
+        label = "X-axis Variable:",
+        choices = names(mtcars),
+        selected = "wt"
+      ),
+      sliderInput(
+        inputId = "x_range",
+        label = "X-axis Range:",
+        min = min(mtcars$wt),
+        max = max(mtcars$wt),
+        value = c(min(mtcars$wt), max(mtcars$wt)),
+        step = 0.1
+      )
+    ),
+    mainPanel(
+      plotOutput(outputId = "scatter_plot")
+    )
+  )
+)
+
+server <- function(input, output) {
+  output$scatter_plot <- renderPlot({
+    ggplot(mtcars, aes_string(x = input$x_var, y = "mpg", color = "factor(am)")) +
+      geom_point(shape = 1, size = 3) +
+      labs(x = input$x_var, y = "mpg") +
+      theme_minimal()
+  })
+}
+shinyApp(ui, server)
+```
+
+## Conclusion
+
+- Interactive exploration of the mtcars dataset.
+- Easy visualization and analysis of variable relationships.
+- Try it out and gain insights from the URL below
+
+https://aijun.shinyapps.io/Project001/
+
+Thanks!
