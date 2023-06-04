@@ -35,4 +35,5 @@ It must contained some embedded R code that gets run when slidifying the documen
 NOTE: Slidify is no longer compatible with with Rpubs. If you choose to use Slidify you must share your presentation using GitHub Pages.
 
 Here the URL for the slides:
+https://ajzhang.github.io/shiny_Project/Reproducible_Pitch_Presentation
 
