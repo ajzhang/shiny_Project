@@ -1,0 +1,13 @@
+name: Project001
+title: Project001
+username:
+account: aijun
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9245133
+bundleId: 7303203
+url: https://aijun.shinyapps.io/Project001/
+when: 1685900500.8856
+lastSyncTime: 1685900500.88561
+asMultiple: FALSE
+asStatic: FALSE
